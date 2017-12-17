@@ -4,8 +4,6 @@ import numpy as np
 import networkx as nx
 
 # Task 5
-
-
 def get_immunized_random(epidemic_graph, n_nodes):
   nodes_to_immunize = random.sample(range(len(epidemic_graph)), n_nodes)
   return nodes_to_immunize
@@ -35,7 +33,6 @@ def dict_to_sorted_list(input_dict, n_nodes):
       n_nodes -= 1
     else:
       break
-
   return output_list
 
 
@@ -43,15 +40,13 @@ def get_immunized_movement_info(movement_info, im_list):
   im_movement_info = np.copy(np.asarray(list(movement_info)))
   for immunized in im_list:
     im_movement_info = im_movement_info[~(im_movement_info == immunized).any(1)]
-  #print('- New immunized list done.')
-
   return im_movement_info
 
 
 def get_immunized_nodes_and_movement(epidemic_graph, movement_info, n_immunized_nodes):
-  # im_bunch = Immunized nodes in a Bunch format
+  # im_bunch = Immunized nodes in a Bunch format:
   im_bunch = base.Bunch()
-  
+
   # Choose immunization by neighbor of a random node:
   im_bunch.neighbors = get_immunized_neighbors(
       epidemic_graph, n_immunized_nodes)
@@ -106,7 +101,6 @@ def get_immunized_nodes_and_movement(epidemic_graph, movement_info, n_immunized_
   all_immunized_nodes = neighbors_set.union(
       random_set, core_set, clustering_set, degree_set, strenght_set, betweenness_set, closeness_set)
   im_bunch.all_immunized_nodes = list(all_immunized_nodes)
-  #im_bunch.all_immunized_nodes_move = get_immunized_movement_info(movement_info, im_bunch.all_immunized_nodes)
 
   return im_bunch
 
@@ -115,7 +109,6 @@ def get_seed_nodes(epidemic_graph, m_seed_nodes, all_immunized_nodes):
   possible_seed_nodes = list(set(range(len(epidemic_graph))) - set(all_immunized_nodes))
   random.shuffle(possible_seed_nodes)
   seed_nodes = possible_seed_nodes[:m_seed_nodes]
-
   return seed_nodes
 
 
@@ -131,7 +124,6 @@ def average_infection_times_for_different_seed_nodes(movement_info, bin_times, n
   plt.savefig('figs/plot_of_infection_times_x_starting_nodes')
   print('Saved plot: Prevalence (fraction of infected nodes) with different infection starting nodes as a function of bin-times')
   plt.clf()
-
   return
 
 

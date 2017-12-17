@@ -274,7 +274,7 @@ def median_inf_time(inf_prob, movement_info, n_iter):
     infected_nodes = random.sample(range(max(movement_info['Source']) + 1), n_iter)
     times_array = []
     for inf_node in infected_nodes:
-        print('First infected node:', inf_node)
+        #print('First infected node:', inf_node)
         infection_times = get_epidemic_infection_times(
             inf_node, inf_prob, movement_info)
         times_array.append(infection_times)
@@ -378,7 +378,6 @@ def read_undirected_weighted_edgelist(network):
     for node_1, node_2, weight in network_info:
         network_list.append(
             '{} {} {}'.format(node_1, node_2, weight))
-    # print(network_list)
     epidemic_graph = nx.parse_edgelist(
         network_list, nodetype=int, data=(('weight', float),))
 
@@ -438,7 +437,7 @@ if __name__ == "__main__":
     do_and_scatter_statisticst(movement_info, epidemic_graph)
 
     ## Task 5
-    print('Looking for the best protection strategy...')
+    print('\nLooking for the best protection strategy...')
     different_strategies, seed_nodes = get_protection_strategies(
         movement_info_array, epidemic_graph)
     ## Average infection times for different immunization strategies and infection seed nodes:
@@ -460,7 +459,7 @@ if __name__ == "__main__":
     print('\nSaved plot: Prevalence (fraction of infected nodes) with different immunization strategies as a function of bin-times')
     plt.clf()
 
-    print("This is how the visualization looks like")
+    print("\nThis is how the visualization looks like")
     inf_prob = 0.1
     inf_node = 0
     infection_times = get_epidemic_infection_times(
